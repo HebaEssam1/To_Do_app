@@ -4,9 +4,9 @@ import 'package:to_do_app/MyThemeData.dart';
 import 'package:to_do_app/task_item.dart';
 class ToDoList extends StatelessWidget {
 
-
   @override
   Widget build(BuildContext context) {
+
     return Container(
       color: MyThemeData.backgroundLightColor,
       //margin: EdgeInsets.symmetric(vertical: 20),

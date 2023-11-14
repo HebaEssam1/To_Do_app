@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Todo extends StatelessWidget {
+class Todo extends StatefulWidget {
 
 
   @override
+  State<Todo> createState() => _TodoState();
+}
+
+class _TodoState extends State<Todo> {
+  DateTime datePicked=DateTime.now();
+  String title='';
+  String description='';
+  var FormKey=GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
+
     return Container(
       margin: EdgeInsets.all(10),
        color: Colors.white,
@@ -12,12 +22,17 @@ class Todo extends StatelessWidget {
         children: [
           Text('Add new Task',
           style: Theme.of(context).textTheme.headline2,),
-          Form(child:Column(
+          Form(
+            key: FormKey,
+            child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(height: 10,),
               TextFormField(
+                onChanged: (value) {
+                  title=value;
+                },
                 decoration: InputDecoration(
                   hintText: 'enter your task',
 
@@ -25,6 +40,9 @@ class Todo extends StatelessWidget {
               ),
               SizedBox(height: 20,),
               TextFormField(
+                onChanged: (value) {
+                  description=value;
+                },
                 decoration: InputDecoration(
                   hintText: 'enter your task description',
 
@@ -39,9 +57,10 @@ class Todo extends StatelessWidget {
               SizedBox(height: 5,),
               InkWell(
                 onTap: () {
-
+                   chooseDate();
                 },
-                child: Text('4/12/2023',textAlign:TextAlign.center,
+                child: Text('${datePicked.month}/${datePicked.day}/${datePicked.year}',
+                  textAlign:TextAlign.center,
                   style: Theme.of(context).textTheme.subtitle1,),
               ),
               SizedBox(height: 25,),
@@ -55,4 +74,20 @@ class Todo extends StatelessWidget {
       ),
     );
   }
+
+  void chooseDate() async{
+     DateTime? chosenDate= await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(Duration(days: 365)));
+     if(chosenDate!=null){
+       datePicked=chosenDate;
+       setState(() {
+
+       });
+     }
+  }
+
+
 }
