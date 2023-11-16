@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/firebase_utils.dart';
+import 'package:to_do_app/task.dart';
 
 class Todo extends StatefulWidget {
 
@@ -28,18 +30,29 @@ class _TodoState extends State<Todo> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 10,),
+              SizedBox(height: 8,),
               TextFormField(
+                validator: (value) {
+                  if (value==Null||value!.isEmpty){
+                    return 'Please enter task title';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   title=value;
                 },
                 decoration: InputDecoration(
                   hintText: 'enter your task',
-
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(height: 13,),
               TextFormField(
+                validator: (value) {
+                  if (value == Null || value!.isEmpty) {
+                    return 'Please enter task title';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   description=value;
                 },
@@ -50,7 +63,7 @@ class _TodoState extends State<Todo> {
                 minLines: 4,
                 maxLines: 4,
               ),
-              SizedBox(height: 15,),
+              SizedBox(height: 8,),
               Text('Select Date',
               style: Theme.of(context).textTheme.subtitle1,
               textAlign: TextAlign.start,),
@@ -63,8 +76,9 @@ class _TodoState extends State<Todo> {
                   textAlign:TextAlign.center,
                   style: Theme.of(context).textTheme.subtitle1,),
               ),
-              SizedBox(height: 25,),
+              SizedBox(height: 15,),
               ElevatedButton(onPressed:() {
+               addTask();
 
               }, child: Text('Add task',
               style: Theme.of(context).textTheme.subtitle2,))
@@ -87,6 +101,21 @@ class _TodoState extends State<Todo> {
 
        });
      }
+  }
+  void addTask(){
+    if(FormKey.currentState?.validate()==true){
+      Task task=Task(
+        title:title,
+        description:description,
+        date:datePicked.microsecondsSinceEpoch
+      );
+      addTasktoFireStore(task).timeout(Duration(microseconds: 50),
+        onTimeout: () {
+          print('task added successfully');
+        },
+      );
+
+    }
   }
 
 
