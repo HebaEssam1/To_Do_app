@@ -1,12 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/MyThemeData.dart';
+import 'package:to_do_app/firebase_utils.dart';
+import 'package:to_do_app/task.dart';
 import 'package:to_do_app/task_item.dart';
-class ToDoList extends StatelessWidget {
 
+import 'list_provider/list_provider.dart';
+class ToDoList extends StatefulWidget {
+  @override
+  State<ToDoList> createState() => _ToDoListState();
+}
+
+class _ToDoListState extends State<ToDoList> {
   @override
   Widget build(BuildContext context) {
-
+    var listprovider= Provider.of<listProvider>(context);
+    listprovider.getAllTaskFromFireStore();
     return Container(
       color: MyThemeData.backgroundLightColor,
       //margin: EdgeInsets.symmetric(vertical: 20),
@@ -14,10 +25,12 @@ class ToDoList extends StatelessWidget {
       child: Column(
         children: [
           CalendarTimeline(
-            initialDate: DateTime.now(),
+            initialDate: listprovider.selectedDate,
             firstDate: DateTime.now().subtract(Duration(days: 365)),
             lastDate: DateTime.now().add(Duration(days: 365)),
-            onDateSelected: (date) => print(date),
+            onDateSelected: (date) {
+              listprovider.changeDate(date);
+            },
             leftMargin: 20,
             monthColor: Colors.blueGrey,
             dayColor: MyThemeData.blackColor,
@@ -30,13 +43,15 @@ class ToDoList extends StatelessWidget {
           Expanded(
             child: ListView.builder (
               itemBuilder: (context, index) {
-                return TaskItem();
+                return TaskItem(task:listprovider.taskList[index]);
               },
-              itemCount: 10,
+              itemCount: listprovider.taskList.length,
             ),
           )
         ],
       ),
     );
   }
+
+
 }

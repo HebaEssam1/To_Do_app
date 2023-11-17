@@ -112,6 +112,7 @@ class _TodoState extends State<Todo> {
       addTasktoFireStore(task).timeout(Duration(microseconds: 50),
         onTimeout: () {
           print('task added successfully');
+          Navigator.pop(context);
         },
       );
 

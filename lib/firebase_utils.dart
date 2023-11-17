@@ -14,3 +14,6 @@ Future<void> addTasktoFireStore(Task task){
   task.id=docRef.id;
   return docRef.set(task);
 }
+Future<void> DeleteTaskFromFirestore(Task task){
+  return getTaskCollection().doc(task.id).delete();
+}
