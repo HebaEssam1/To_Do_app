@@ -18,7 +18,7 @@ class _TodoState extends State<Todo> {
   Widget build(BuildContext context) {
 
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(5),
        color: Theme.of(context).primaryColor,
       child: Column(
         children: [
@@ -30,7 +30,7 @@ class _TodoState extends State<Todo> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 8,),
+              SizedBox(height: 5,),
               TextFormField(
                 validator: (value) {
                   if (value==Null||value!.isEmpty){
@@ -47,7 +47,7 @@ class _TodoState extends State<Todo> {
 
                 ),
               ),
-              SizedBox(height: 13,),
+              SizedBox(height: 10,),
               TextFormField(
                 validator: (value) {
                   if (value == Null || value!.isEmpty) {
@@ -65,7 +65,7 @@ class _TodoState extends State<Todo> {
                 minLines: 4,
                 maxLines: 4,
               ),
-              SizedBox(height: 8,),
+              SizedBox(height: 5,),
               Text('Select Date',
               style: Theme.of(context).textTheme.subtitle1,
               textAlign: TextAlign.start,),
@@ -78,7 +78,7 @@ class _TodoState extends State<Todo> {
                   textAlign:TextAlign.center,
                   style: Theme.of(context).textTheme.subtitle1,),
               ),
-              SizedBox(height: 15,),
+              SizedBox(height: 10,),
               ElevatedButton(onPressed:() {
                addTask();
 

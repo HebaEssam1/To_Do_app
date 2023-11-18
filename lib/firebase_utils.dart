@@ -17,7 +17,8 @@ Future<void> addTasktoFireStore(Task task){
 Future<void> DeleteTaskFromFirestore(Task task){
   return getTaskCollection().doc(task.id).delete();
 }
-Future<void> TaskDone(Task task){
+Future<void> TaskDone(Task task)async{
 
-  return getTaskCollection().doc(task.id).update(task.);
+  return getTaskCollection().doc(task.id).update({'isDone':true}).
+  then((value) => print('task updated'));
 }
