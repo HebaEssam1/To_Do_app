@@ -31,11 +31,12 @@ class _ToDoListState extends State<ToDoList> {
             onDateSelected: (date) {
               listprovider.changeDate(date);
             },
+
             leftMargin: 20,
             monthColor: Colors.blueGrey,
             dayColor: MyThemeData.blackColor,
             activeDayColor: Colors.white,
-            activeBackgroundDayColor: Theme.of(context).primaryColor,
+            activeBackgroundDayColor: MyThemeData.primaryLightColor,
             dotsColor: MyThemeData.whiteColor,
             selectableDayPredicate: (date) =>true,
             locale: 'en_ISO',

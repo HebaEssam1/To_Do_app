@@ -18,12 +18,12 @@ class _TodoState extends State<Todo> {
   Widget build(BuildContext context) {
 
     return Container(
-      margin: EdgeInsets.all(10),
-       color: Colors.white,
+      padding: EdgeInsets.all(8),
+       color: Theme.of(context).primaryColor,
       child: Column(
         children: [
           Text('Add new Task',
-          style: Theme.of(context).textTheme.headline2,),
+          style: Theme.of(context).textTheme.subtitle1,),
           Form(
             key: FormKey,
             child:Column(
@@ -43,6 +43,8 @@ class _TodoState extends State<Todo> {
                 },
                 decoration: InputDecoration(
                   hintText: 'enter your task',
+                  hintStyle: Theme.of(context).textTheme.subtitle1,
+
                 ),
               ),
               SizedBox(height: 13,),
@@ -58,7 +60,7 @@ class _TodoState extends State<Todo> {
                 },
                 decoration: InputDecoration(
                   hintText: 'enter your task description',
-
+                  hintStyle: Theme.of(context).textTheme.subtitle1,
                 ),
                 minLines: 4,
                 maxLines: 4,

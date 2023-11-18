@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,9 +24,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    var listprovider=Provider.of<listProvider>(context);
     return MaterialApp(
       home: HomePage(),
       theme: MyThemeData.lightMode,
+      darkTheme: MyThemeData.darkMode,
+      themeMode:listprovider.theme ,
     );
   }
 }

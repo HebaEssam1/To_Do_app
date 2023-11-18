@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../firebase_utils.dart';
 import '../task.dart';
@@ -6,6 +7,15 @@ import '../task.dart';
 class listProvider extends ChangeNotifier {
   List<Task> taskList = [];
   DateTime selectedDate = DateTime.now();
+  String language='English';
+  ThemeMode theme=ThemeMode.light;
+  void changeTheme (ThemeMode newtheme){
+    if(theme==newtheme){
+      return;
+    }
+    theme=newtheme;
+    notifyListeners();
+  }
  Future<void> getAllTaskFromFireStore() async {
     QuerySnapshot<Task> querysnapshot = await getTaskCollection().get();
     taskList = querysnapshot.docs.map((e) {

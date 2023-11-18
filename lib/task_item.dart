@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/MyThemeData.dart';
 import 'package:to_do_app/firebase_utils.dart';
+import 'package:to_do_app/list_provider/list_provider.dart';
 import 'package:to_do_app/task.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 class TaskItem extends StatelessWidget {
@@ -8,6 +10,7 @@ class TaskItem extends StatelessWidget {
    TaskItem({required this.task});
   @override
   Widget build(BuildContext context) {
+    var listprovider=Provider.of<listProvider>(context);
     return Container(
       margin: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
       child: Slidable(
@@ -35,7 +38,7 @@ class TaskItem extends StatelessWidget {
         ),
         child: Container(
           decoration: BoxDecoration(
-            color: MyThemeData.whiteColor,
+            color: Theme.of(context).primaryColor,
             borderRadius: BorderRadius.circular(20)
           ),
 
@@ -47,25 +50,39 @@ class TaskItem extends StatelessWidget {
               Container(
                 width: 5,
                 height: 70,
-                decoration:BoxDecoration(color: MyThemeData.primaryLightColor,
+                decoration:BoxDecoration(
+                    color:task.isDone==false? MyThemeData.primaryLightColor:
+                MyThemeData.greenColor,
                 borderRadius: BorderRadius.circular(50))
               ),
               Column(
                 children: [
-                  Text(task.title,style: Theme.of(context).textTheme.subtitle1,),
-                  Text(task.description,style: Theme.of(context).textTheme.subtitle1,),
+                  Text(task.title,style: task.isDone==false?Theme.of(context).textTheme.headline5:
+                    Theme.of(context).textTheme.headline6,),
+                  Text(task.description, style: task.isDone==false?Theme.of(context).textTheme.headline5:
+            Theme.of(context).textTheme.headline6,),
                 ],
               ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: MyThemeData.primaryLightColor,
+              task.isDone==false?
+              InkWell(
+                onTap: () {
+                  TaskDone(task);
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5,horizontal: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: MyThemeData.primaryLightColor,
+                  ),
+                  child: Icon(Icons.check,
+                  color: MyThemeData.whiteColor,size:30),
                 ),
-
-                child: Icon(Icons.check,
-                color: MyThemeData.whiteColor,size:30),
-              )
+              ):
+                  Text('Done!',style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    color: MyThemeData.greenColor,
+                  ),)
             ],
           ),
         ),
