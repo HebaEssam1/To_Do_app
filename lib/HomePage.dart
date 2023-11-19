@@ -5,12 +5,13 @@ import 'package:to_do_app/to_do_list.dart';
 import 'package:to_do_app/todo.dart';
 
 class HomePage extends StatefulWidget {
+  static const String routeName='Home Page';
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-String route_name='Home Page';
+
 int selectedindex=0;
 
   @override
@@ -36,7 +37,7 @@ int selectedindex=0;
      floatingActionButtonLocation:FloatingActionButtonLocation.centerDocked,
      bottomNavigationBar: BottomAppBar(
        shape: CircularNotchedRectangle(),
-       notchMargin: 8,
+       notchMargin: 12,
        child: BottomNavigationBar(
          currentIndex: selectedindex,
          onTap: (index) {

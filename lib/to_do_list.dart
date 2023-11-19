@@ -19,7 +19,7 @@ class _ToDoListState extends State<ToDoList> {
     var listprovider= Provider.of<listProvider>(context);
     listprovider.getAllTaskFromFireStore();
     return Container(
-      color: MyThemeData.backgroundLightColor,
+      color: listprovider.theme==ThemeMode.light ?MyThemeData.backgroundLightColor: MyThemeData.backgroundDarkColor,
       //margin: EdgeInsets.symmetric(vertical: 20),
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -34,7 +34,7 @@ class _ToDoListState extends State<ToDoList> {
 
             leftMargin: 20,
             monthColor: Colors.blueGrey,
-            dayColor: MyThemeData.blackColor,
+            dayColor:listprovider.theme==ThemeMode.light ? MyThemeData.blackColor: MyThemeData.whiteColor,
             activeDayColor: Colors.white,
             activeBackgroundDayColor: MyThemeData.primaryLightColor,
             dotsColor: MyThemeData.whiteColor,

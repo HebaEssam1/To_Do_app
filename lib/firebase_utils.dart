@@ -22,3 +22,12 @@ Future<void> TaskDone(Task task)async{
   return getTaskCollection().doc(task.id).update({'isDone':true}).
   then((value) => print('task updated'));
 }
+Future<void> changeTask(Task task,String newtitle,String newdescription,DateTime newdate)async{
+
+  return getTaskCollection().doc(task.id).update({'title': newtitle,'description':newdescription,'date':newdate.microsecondsSinceEpoch}).
+  then((value) {
+    print('task edited sucessfully');
+
+  },);
+}
+

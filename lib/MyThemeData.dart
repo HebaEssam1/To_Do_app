@@ -8,6 +8,7 @@ class MyThemeData {
   static const Color blackColor=Color(0xff383838);
   static const Color backgroundLightColor=Color(0xffDFECDB);
   static const Color primaryDarkColor=Color(0xff141922);
+  static const Color backgroundDarkColor=Color(0xff060e1e);
   static ThemeData lightMode=ThemeData(
     primaryColor: whiteColor,
     appBarTheme: AppBarTheme(
@@ -37,7 +38,7 @@ class MyThemeData {
           fontSize: 23
       ),
       subtitle2:TextStyle(
-          color: whiteColor,
+          color: blackColor,
           fontWeight: FontWeight.bold,
           fontSize: 25
       ),

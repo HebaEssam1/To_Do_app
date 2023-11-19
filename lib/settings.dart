@@ -21,11 +21,11 @@ class _SettingsState extends State<Settings> {
     var listprovider =Provider.of<listProvider>(context);
     return Container(
       padding: EdgeInsets.all(20),
-      color: MyThemeData.backgroundLightColor,
+      color: listprovider.theme==ThemeMode.light ?MyThemeData.backgroundLightColor: MyThemeData.backgroundDarkColor,
        child: Column(
          crossAxisAlignment: CrossAxisAlignment.start,
          children:[
-            Text('language',style: Theme.of(context).textTheme.headline2,textAlign: TextAlign.start,),
+            Text('language',style: Theme.of(context).textTheme.subtitle1,textAlign: TextAlign.start,),
            InkWell(
              onTap: () {
                openlanguagebottomsheet();
@@ -47,7 +47,7 @@ class _SettingsState extends State<Settings> {
              ),
            ),
            SizedBox(height: 15,),
-           Text('theme',style: Theme.of(context).textTheme.headline2,textAlign: TextAlign.start,),
+           Text('theme',style: Theme.of(context).textTheme.subtitle1,textAlign: TextAlign.start,),
            InkWell(
              onTap: () {
                openthemebottomsheet();

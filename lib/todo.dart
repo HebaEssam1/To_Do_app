@@ -83,7 +83,7 @@ class _TodoState extends State<Todo> {
                addTask();
 
               }, child: Text('Add task',
-              style: Theme.of(context).textTheme.subtitle2,))
+              style: Theme.of(context).textTheme.headline1))
             ],
           ),)
         ],
